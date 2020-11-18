@@ -10,6 +10,12 @@ const stateSchema = new mongoose.Schema({
     },
     offtime: {
         type: String
+    },
+    date: {
+        type: String
+    },
+    day: {
+        type: String
     }
 });
 
