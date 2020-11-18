@@ -4,7 +4,7 @@ const State = require('../model/State');
 router.post('/', async (req, res) => {
     if(req.body.STATE == 1) {
         const devState = new State({
-            id: req.body.DEVICEID,
+            id: req.body.REQUESTNO,
             ontime: req.body.TIME,
             date: req.body.DATE,
             day: req.body.DAY
