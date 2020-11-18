@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
             return res.status(400).send(err);
         }
     } else {
-        State.updateOne({id: req.body.DEVICEID}, {$set: {offtime: req.body.TIME}}, (err) => {
+        State.updateOne({id: req.body.REQUESTNO}, {$set: {offtime: req.body.TIME}}, (err) => {
             if(err) return res.status(400).send(err);
             console.log("[Off Time Success]");
             return res.send("Success");
