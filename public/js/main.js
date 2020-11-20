@@ -3,7 +3,7 @@ const onArr = [];
 let totalSum = 0;
 const offArr = [];
 async function getChartData() {
-    const response = await fetch("http://localhost:3000/getData")
+    const response = await fetch("http://statemonitor.herokuapp.com/getData")
     return response.json();
 }
 async function assignData() {
