@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 // Routes
 const apiRouter = require('./routes/api');
@@ -9,6 +10,9 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.set("view engine", "ejs");
+app.set("views", "views");
+app.use(express.static(path.join(__dirname, "public")));
 app.use('/api', apiRouter);
 app.use('/', webRouter);
 

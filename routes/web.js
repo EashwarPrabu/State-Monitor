@@ -6,10 +6,14 @@ function getData() {
     return mydata;
 }
 
-router.get('/', async (req, res) => {
+router.get('/getData', async(req, res) => {
     const mydata = await getData();
     console.log(mydata);
-    return res.send(mydata);
+    return res.json(mydata);
+});
+
+router.get('/', (req, res) => {
+    return res.render('index');
 });
 
 module.exports = router; 
