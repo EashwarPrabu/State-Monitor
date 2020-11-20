@@ -50,10 +50,13 @@ function showDiff(formattedOn) {
     leftSec = leftSec - hrs * 60*60;
     let min = Math.floor(leftSec/(60));
     leftSec = leftSec - min * 60;
-    // $("#activediv").empty()
-    const h3 = document.getElementById('activetime');
-    h3.innerHTML = " ";
-    h3.innerHTML = "The device has been active for " + days + " days " + hrs + " hours " + min + " minutes and " + leftSec + " seconds.";  
+    $("#activediv").empty()
+    const active_div = document.getElementById('activediv');
+    active_div.classList.add("active");
+    const h3 = document.createElement('h3');
+    h3.innerHTML = "The device has been active for " + days + " days " + hrs + " hours " + min + " minutes and " + leftSec + " seconds.";
+    h3.classList.add('active-time');
+    active_div.appendChild(h3);
     setTimeout(() => {
         showDiff(onDate);
     },1000);
