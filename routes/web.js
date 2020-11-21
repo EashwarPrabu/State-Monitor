@@ -20,7 +20,7 @@ function getData(userDate = getCurrentDate()) {
 }
 
 router.get('/getData', async(req, res) => {
-    const mydata = await getData();
+    const mydata = await getData('20.11.2020');
     console.log(mydata);
     return res.json(mydata);
 });
