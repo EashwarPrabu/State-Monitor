@@ -21,7 +21,7 @@ document.getElementById("submit").addEventListener("click", function() {
 async function getChartData() {
     let url = "https://statemonitor.herokuapp.com/api";
     if(finalDate) {
-        url += `https://statemonitor.herokuapp.com/api?date=${finalDate}`;
+        url += `?date=${finalDate}`;
     }
     console.log(url);
     const response = await fetch(url);
