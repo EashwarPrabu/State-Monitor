@@ -1,15 +1,50 @@
 let mydata;
-const onArr = [];
+let onArr = [];
 let totalSum = 0;
-const offArr = [];
+let offArr = [];
+let mydate = new Date();
+let arr = mydate.toString().split(' ');
+let today = `${arr[2]} ${arr[1]} ${arr[3]}`;
+let finalDate;
+let timer;
+
+document.getElementById("submit").addEventListener("click", function() {
+    let selectdate = document.getElementById('datepicker').value.split('-');
+    let formatted_date = [selectdate[2],selectdate[1],selectdate[0]].join('.'); 
+    finalDate = formatted_date;
+    console.log(finalDate);
+    deleteData();
+    assignData();
+    closeModal1();
+});
+  
+//https://statemonitor.herokuapp.com/api?date=${finalDate}
 async function getChartData() {
-    const response = await fetch("https://statemonitor.herokuapp.com/api");
+    let url = "https://statemonitor.herokuapp.com/api";
+    if(finalDate) {
+        url += `https://statemonitor.herokuapp.com/api?date=${finalDate}`;
+    }
+    console.log(url);
+    const response = await fetch(url);
     return response.json();
 }
 
 async function assignData() {
-    mydata = await getChartData();
+    mydata = await getChartData(finalDate);
     console.log(mydata);
+    const error = document.getElementById("error") 
+    if (mydata.length == 0){
+        error.textContent = `Data is not available for ${finalDate || today}. Please select a different date`;
+        error.style.color = "red" 
+        error.style.fontSize = "25"
+        console.log("Data not available. Please select a different date");
+        return;
+    } else {
+        error.textContent = "Displaying Datas for " + finalDate;
+        error.style.color = "#5cb85c";
+        error.style.fontSize = "25";
+
+    }
     Chart.defaults.global.defaultFontFamily = 'Alegreya';
     Chart.defaults.global.defaultFontSize = 18;
     Chart.defaults.global.defaultFontColor = '#777';
@@ -36,6 +71,20 @@ async function assignData() {
 }
 
 assignData();
+function deleteData() {
+    if(timer) {
+        console.log(`BEFORE TIMER VALUE: ${timer}`);
+        clearTimeout(timer);
+        timer = null;
+        console.log(`AFTER TIMER VALUE: ${timer}`);
+    }
+    onArr = [];
+    offArr = [];
+    mydata = {};
+    totalSum = 0;
+    $('#closing1').empty();
+    $('#closing2').empty();
+}
 
 function showDiff(formattedOn) {
     let onDate = new Date(formattedOn);
@@ -51,14 +100,14 @@ function showDiff(formattedOn) {
     leftSec = leftSec - hrs * 60*60;
     let min = Math.floor(leftSec/(60));
     leftSec = leftSec - min * 60;
-    $("#activediv").empty()
+    $("#activediv").empty();
     const active_div = document.getElementById('activediv');
     active_div.classList.add("active");
     const h3 = document.createElement('h3');
     h3.innerHTML = "The device has been active for " + days + " days " + hrs + " hours " + min + " minutes and " + leftSec + " seconds.";
     h3.classList.add('active-time');
     active_div.appendChild(h3);
-    setTimeout(() => {
+    timer = setTimeout(() => {
         showDiff(onDate);
     },1000);
 }
@@ -289,4 +338,32 @@ function loadLastDiv() {
     closing_div2.append(last1);
     closing_div1.append(h11);
     closing_div2.append(h12);
+}
+
+// MODAL
+//login modal
+const modal1 = document.querySelector("#my-modal-login");
+const modalBtn1 = document.querySelector("#modal-btn-login");
+const closeBtn1 = document.querySelector(".close1");
+
+// Events
+modalBtn1.addEventListener("click", openModal1);
+closeBtn1.addEventListener("click", closeModal1);
+window.addEventListener("click", outsideClick1);
+
+// Open
+function openModal1() {
+  modal1.style.display = "block";
+}
+
+function closeModal1() {
+    modal1.style.display = "none";
+  }
+  
+
+//Close If Outside Click
+function outsideClick1(e) {
+  if (e.target == modal1) {
+    modal1.style.display = "none";
+  }
 }

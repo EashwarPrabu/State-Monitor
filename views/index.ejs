@@ -18,17 +18,40 @@
   </header>
     <div id ="activediv">
     </div>
-        <div style="margin: 25px auto auto auto; width: 50%;">
-            <canvas id="examChart1" width="500" height="300"></canvas>
-            <br><br>
-            <canvas id="examChart2" width="500" height="300"></canvas> 
-            <br><br> 
+    <div style="margin: 25px auto auto auto; width: 50%;">
+      <span id="error"></span> 
+      <button
+        type="button"
+        id="modal-btn-login"
+        class="btn btn-primary btn-lg float-right"
+      >
+        Enter Date Manually
+      </button>
+      <br><br><br>
+      <canvas id="examChart1" width="500" height="300"></canvas>
+      <br><br>
+      <canvas id="examChart2" width="500" height="300"></canvas> 
+      <br><br> 
+    </div>
+    <div id = "closing"; style="margin: auto; width: 50%; display: flex;">
+        <div id = "closing1"; style="margin: auto; border: 2px solid rgba(163, 216, 244, 0.7); background-color: rgba(163, 216, 244, 0.7); border-radius: 10px;"></div>
+        <div id = "closing2"; style="margin: auto; border: 2px solid rgba(163, 216, 244, 0.7); background-color: rgba(163, 216, 244, 0.7); border-radius: 10px;"></div>
+    </div>
+    <br><br>
+    <div id="my-modal-login" class="modal1">
+      <div class="modal-content1">
+        <div class="modal-header1">
+          <span class="close1">&times;</span>
+          <h2 style="color: #e0ece4;">Enter Date</h2>
         </div>
-        <div id = "closing"; style="margin: auto; width: 50%; display: flex;">
-            <div id = "closing1"; style="margin: auto; border: 2px solid rgba(163, 216, 244, 0.7); background-color: rgba(163, 216, 244, 0.7); border-radius: 10px;"></div>
-            <div id = "closing2"; style="margin: auto; border: 2px solid rgba(163, 216, 244, 0.7); background-color: rgba(163, 216, 244, 0.7); border-radius: 10px;"></div>
+        <div class="modal-body1 centered">
+              <input type="date" style="font-size: 1.5rem;width: 100%;" id="datepicker" min="2020-11-20">
         </div>
-        <br><br>
+        <div class="modal-footer1">
+          <button type="submit" id="submit" class="btn btn-success" data-dismiss="modal"/>Submit</button>
+        </div>
+      </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

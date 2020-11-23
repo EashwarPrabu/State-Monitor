@@ -13,14 +13,21 @@ function getCurrentDate() {
     return output;
 }
 
-async function getData(userDate = getCurrentDate()) {
+async function getData(userDate) {
     const queryDate = userDate;
     const mydata = await State.find({date: queryDate});
     return mydata;
 }
 
 router.get('/', async(req, res) => {
-    const mydata = await getData('20.11.2020');
+    let userDate;
+    if(req.query.date) {
+        userDate = req.query.date;
+        console.log(userDate);
+    } else {
+        userDate = getCurrentDate();
+    }
+    const mydata = await getData(userDate);
     console.log(mydata);
     return res.json(mydata);
 });
