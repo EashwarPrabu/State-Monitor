@@ -83,6 +83,8 @@ function deleteData() {
     totalSum = 0;
     $('#closing1').empty();
     $('#closing2').empty();
+    $("#activediv").removeClass('active');
+    $("#activediv").empty();
 }
 
 function getCurrentDate() {
