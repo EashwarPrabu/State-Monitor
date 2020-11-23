@@ -17,8 +17,7 @@ document.getElementById("submit").addEventListener("click", function() {
     assignData();
     closeModal1();
 });
-  
-//https://statemonitor.herokuapp.com/api?date=${finalDate}
+
 async function getChartData() {
     let url = "https://statemonitor.herokuapp.com/api";
     if(finalDate) {
