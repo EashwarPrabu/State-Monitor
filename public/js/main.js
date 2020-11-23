@@ -2,10 +2,7 @@ let mydata;
 let onArr = [];
 let totalSum = 0;
 let offArr = [];
-let mydate = new Date();
-let arr = mydate.toString().split(' ');
-let today = `${arr[2]} ${arr[1]} ${arr[3]}`;
-let finalDate;
+let finalDate = getCurrentDate();
 let timer;
 
 document.getElementById("submit").addEventListener("click", function() {
@@ -27,22 +24,22 @@ async function getChartData() {
     const response = await fetch(url);
     return response.json();
 }
-
+assignData();
 async function assignData() {
     mydata = await getChartData(finalDate);
     console.log(mydata);
     const error = document.getElementById("error") 
     if (mydata.length == 0){
-        error.textContent = `Data is not available for ${finalDate || today}. Please select a different date`;
+        error.textContent = `Data is not available for ${finalDate}. Please select a different date`;
         error.style.color = "red" 
         error.style.fontSize = "25"
         console.log("Data not available. Please select a different date");
+        deleteData();
         return;
     } else {
         error.textContent = "Displaying Datas for " + finalDate;
         error.style.color = "#5cb85c";
         error.style.fontSize = "25";
-
     }
     Chart.defaults.global.defaultFontFamily = 'Alegreya';
     Chart.defaults.global.defaultFontSize = 18;
@@ -69,7 +66,6 @@ async function assignData() {
     loadLastDiv();
 }
 
-assignData();
 function deleteData() {
     if(timer) {
         console.log(`BEFORE TIMER VALUE: ${timer}`);
@@ -77,12 +73,28 @@ function deleteData() {
         timer = null;
         console.log(`AFTER TIMER VALUE: ${timer}`);
     }
+    let canvas1 = $('#examChart1')[0]; 
+    canvas1.width = canvas1.width;
+    let canvas2 = $('#examChart2')[0]; 
+    canvas2.width = canvas2.width;
     onArr = [];
     offArr = [];
     mydata = {};
     totalSum = 0;
     $('#closing1').empty();
     $('#closing2').empty();
+}
+
+function getCurrentDate() {
+    let monthNames = ["January", "February", "March", "April", "May", "June",
+         "July", "August", "September", "October", "November", "December"];
+    let dateObj = new Date();
+    let monthString = monthNames[dateObj.getMonth()];
+    let monthNo = monthNames.indexOf(monthString) + 1;
+    let day = String(dateObj.getDate()).padStart(2, '0');
+    let year = dateObj.getFullYear();
+    let output =  day + '.'+ monthNo  + '.' + year;
+    return output;
 }
 
 function showDiff(formattedOn) {

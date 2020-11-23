@@ -1,18 +1,6 @@
 const router = require('express').Router();
 const State = require('../model/State');
 
-function getCurrentDate() {
-    let monthNames = ["January", "February", "March", "April", "May", "June",
-         "July", "August", "September", "October", "November", "December"];
-    let dateObj = new Date();
-    let monthString = monthNames[dateObj.getMonth()];
-    let monthNo = monthNames.indexOf(monthString) + 1;
-    let day = String(dateObj.getDate()).padStart(2, '0');
-    let year = dateObj.getFullYear();
-    let output =  day + '.'+ monthNo  + '.' + year;
-    return output;
-}
-
 async function getData(userDate) {
     const queryDate = userDate;
     const mydata = await State.find({date: queryDate});
@@ -20,13 +8,8 @@ async function getData(userDate) {
 }
 
 router.get('/', async(req, res) => {
-    let userDate;
-    if(req.query.date) {
-        userDate = req.query.date;
-        console.log(userDate);
-    } else {
-        userDate = getCurrentDate();
-    }
+    let userDate = req.query.date;
+    console.log(userDate);
     const mydata = await getData(userDate);
     console.log(mydata);
     return res.json(mydata);
