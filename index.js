@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use('/api', apiRouter);
 app.use('/', webRouter);
 
-const mongoURI = "mongodb+srv://Eashwar:Eashwar20@esproject.qc15s.mongodb.net/smDB?retryWrites=true&w=majority";
+const mongoURI = "mongodb+srv://Eashwar:Eashwar20@esproject.qc15s.mongodb.net/stateMonitor?retryWrites=true&w=majority";
 // DB Connection
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,

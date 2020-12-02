@@ -4,6 +4,7 @@ const State = require('../model/State');
 async function getData(userDate) {
     const queryDate = userDate;
     const mydata = await State.find({date: queryDate});
+    console.log(mydata);
     return mydata;
 }
 
@@ -11,7 +12,7 @@ router.get('/', async(req, res) => {
     let userDate = req.query.date;
     console.log(userDate);
     const mydata = await getData(userDate);
-    console.log(mydata);
+    // console.log(mydata);
     return res.json(mydata);
 });
 
@@ -32,7 +33,9 @@ router.post('/', async (req, res) => {
             return res.status(400).send(err);
         }
     } else {
-        State.updateOne({id: req.body.REQUESTNO}, {$set: {offtime: req.body.TIME}}, (err) => {
+        let randId = Math.floor(Math.random() * 100000);
+        console.log(randId, typeof randId);
+        State.updateOne({id: req.body.REQUESTNO}, {$set: { id: randId, offtime: req.body.TIME}}, (err) => {
             if(err) return res.status(400).send(err);
             console.log("[Off Time Success]");
             return res.send("Success");
