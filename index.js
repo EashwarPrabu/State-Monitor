@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+require('dotenv').config();
 
 // Routes
 const apiRouter = require('./routes/api');
@@ -16,8 +17,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use('/api', apiRouter);
 app.use('/', webRouter);
 
-const mongoURI = "mongodb+srv://Eashwar:Eashwar20@esproject.qc15s.mongodb.net/stateMonitor?retryWrites=true&w=majority";
 // DB Connection
+const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
