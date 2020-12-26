@@ -4,6 +4,10 @@ const stateSchema = new mongoose.Schema({
     id: {
         type: Number,
     },
+    devid: {
+        type: String, 
+        required: true
+    },
     ontime: {
         type: String,
         required: true
