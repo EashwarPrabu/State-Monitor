@@ -11,18 +11,22 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.set("view engine", "ejs");
-app.set("views", "views");
-app.use(express.static(path.join(__dirname, "public")));
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', apiRouter);
 app.use('/', webRouter);
 
 // DB Connection
 const mongoURI = process.env.MONGO_URI;
-mongoose.connect(mongoURI, {
+mongoose.connect(
+  mongoURI,
+  {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-}, () => console.log('Connected to DB!'));
+    useUnifiedTopology: true,
+  },
+  () => console.log('Connected to DB!')
+);
 
 // PORT selection and firing up the Server!
 const PORT = process.env.PORT || 3000;

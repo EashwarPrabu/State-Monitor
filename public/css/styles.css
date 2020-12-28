@@ -10,7 +10,7 @@
   --modal-color: #428bca;
 }
 body {
-  font-family: "Alegreya", serif;
+  font-family: 'Alegreya', serif;
 }
 p {
   color: #666;
@@ -46,13 +46,13 @@ Header styles minus menu
   box-shadow: 3px 3px 8px hsl(0, 0%, 70%);
 }
 
-/* .active {
+.active-area {
   margin: auto;
   width: 75%;
   border-radius: 5px;
   border: 2px solid #16a596;
   background-color: #16a596;
-} */
+}
 
 .active-stat {
   margin: auto;
